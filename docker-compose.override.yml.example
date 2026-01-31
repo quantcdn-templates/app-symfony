@@ -1,0 +1,54 @@
+# Copy this file to docker-compose.override.yml for local development
+# docker-compose.override.yml is ignored by git for local customization
+
+services:
+  symfony:
+    environment:
+      # Symfony Configuration
+      - APP_ENV=dev
+      - APP_DEBUG=1
+      - APP_SECRET=your-secret-key-here
+
+      # Database Configuration (optional, only if using Doctrine)
+      # - DATABASE_URL=mysql://symfony:symfony@db:3306/symfony?serverVersion=8.4
+      # - DB_HOST=db
+      # - DB_PORT=3306
+      # - DB_DATABASE=symfony
+      # - DB_USERNAME=symfony
+      # - DB_PASSWORD=symfony
+
+      # Mailer Configuration (for local testing)
+      - MAILER_DSN=null://null
+
+      # SMTP Configuration (uncomment to test SMTP)
+      # - QUANT_SMTP_RELAY_ENABLED=false
+      # - QUANT_SMTP_HOST=mailhog
+      # - QUANT_SMTP_PORT=1025
+      # - QUANT_SMTP_FROM=test@example.com
+      # - QUANT_SMTP_FROM_NAME="Symfony Test"
+
+  # Uncomment below if you need a database
+  # db:
+  #   labels:
+  #     quant.type: mysql
+  #   image: mysql:8.4
+  #   restart: unless-stopped
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=rootpassword
+  #     - MYSQL_DATABASE=symfony
+  #     - MYSQL_USER=symfony
+  #     - MYSQL_PASSWORD=symfony
+  #   volumes:
+  #     - db_data:/var/lib/mysql
+  #   ports:
+  #     # Expose MySQL port for local database clients
+  #     - "3306:3306"
+  #   healthcheck:
+  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 3
+
+# Uncomment if using database
+# volumes:
+#   db_data:

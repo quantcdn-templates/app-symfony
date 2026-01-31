@@ -1,0 +1,49 @@
+name: "Build and Deploy"
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize Quant Cloud
+        uses: quantcdn/quant-cloud-init-action@v1
+        id: quant
+        with:
+          api_key: ${{ secrets.QUANT_API_KEY }}
+          organization: ${{ secrets.QUANT_ORGANIZATION }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Quant Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ steps.quant.outputs.registry }}
+          username: ${{ steps.quant.outputs.registry_username }}
+          password: ${{ steps.quant.outputs.registry_password }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.quant.outputs.registry }}/${{ github.repository }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Deploy to Quant Cloud
+        uses: quantcdn/quant-cloud-environment-state-action@v1
+        with:
+          api_key: ${{ secrets.QUANT_API_KEY }}
+          organization: ${{ secrets.QUANT_ORGANIZATION }}
+          image: ${{ steps.quant.outputs.registry }}/${{ github.repository }}:${{ github.sha }}

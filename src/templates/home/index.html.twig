@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-color), #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            font-size: 1.25rem;
+            color: #a0a0a0;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 2rem;
+        }
+        .card {
+            background: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: left;
+        }
+        .card h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        .card p {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        .links {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .links a:hover {
+            text-decoration: none;
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        .footer {
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.875rem;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <main class="hero">
+        <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="11" stroke="#0fb9b1" stroke-width="2"/>
+            <path d="M12 6L12 12L17 15" stroke="#0fb9b1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <h1>{{ title }}</h1>
+        <p class="subtitle">
+            Your Symfony application is now running on Quant Cloud.
+            Start building something amazing!
+        </p>
+
+        <div class="info-cards">
+            <div class="card">
+                <h3>Symfony Version</h3>
+                <p>{{ symfony_version }}</p>
+            </div>
+            <div class="card">
+                <h3>PHP Version</h3>
+                <p>{{ php_version }}</p>
+            </div>
+            <div class="card">
+                <h3>Environment</h3>
+                <p>{{ app.environment }}</p>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="https://symfony.com/doc" target="_blank">
+                <span>Symfony Docs</span>
+            </a>
+            <a href="https://www.quant.cloud/docs" target="_blank">
+                <span>Quant Cloud Docs</span>
+            </a>
+            <a href="https://github.com/quantcdn-templates/app-symfony" target="_blank">
+                <span>Template Source</span>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Powered by Symfony and Quant Cloud</p>
+    </footer>
+{% endblock %}

@@ -1,0 +1,59 @@
+services:
+  symfony:
+    image: ghcr.io/quantcdn-templates/app-symfony:latest
+    build: .
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      # Persistent storage for Symfony var directory (cache, logs)
+      - symfony_var:/var/www/html/var
+    environment:
+      # Symfony Configuration
+      - APP_ENV=${APP_ENV:-prod}
+      - APP_DEBUG=${APP_DEBUG:-0}
+      - APP_SECRET=${APP_SECRET}
+
+      # Database Configuration (optional, only if using Doctrine)
+      - DATABASE_URL=${DATABASE_URL:-}
+      - DB_HOST=${DB_HOST:-db}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_DATABASE=${DB_DATABASE:-symfony}
+      - DB_USERNAME=${DB_USERNAME:-symfony}
+      - DB_PASSWORD=${DB_PASSWORD:-symfony}
+
+      # Mailer Configuration
+      - MAILER_DSN=${MAILER_DSN:-null://null}
+
+      # SMTP Configuration
+      - QUANT_SMTP_RELAY_ENABLED=${QUANT_SMTP_RELAY_ENABLED:-false}
+      - QUANT_SMTP_HOST=${QUANT_SMTP_HOST}
+      - QUANT_SMTP_PORT=${QUANT_SMTP_PORT:-587}
+      - QUANT_SMTP_USERNAME=${QUANT_SMTP_USERNAME}
+      - QUANT_SMTP_PASSWORD=${QUANT_SMTP_PASSWORD}
+      - QUANT_SMTP_FROM=${QUANT_SMTP_FROM}
+      - QUANT_SMTP_FROM_NAME=${QUANT_SMTP_FROM_NAME}
+
+      # Debug Configuration
+      - QUANT_DEBUG=${QUANT_DEBUG:-0}
+      - LOG_DEBUG=${LOG_DEBUG:-0}
+
+      # Quant Plugin Environment Variables
+      - QUANT_ENABLED=${QUANT_ENABLED}
+      - QUANT_DISABLE_TLS_VERIFY=${QUANT_DISABLE_TLS_VERIFY}
+      - QUANT_HTTP_REQUEST_TIMEOUT=${QUANT_HTTP_REQUEST_TIMEOUT}
+      - QUANT_WEBSERVER_URL=${QUANT_WEBSERVER_URL}
+      - QUANT_WEBSERVER_HOST=${QUANT_WEBSERVER_HOST}
+      - QUANT_API_ENDPOINT=${QUANT_API_ENDPOINT}
+      - QUANT_CUSTOMER=${QUANT_CUSTOMER}
+      - QUANT_PROJECT=${QUANT_PROJECT}
+      - QUANT_TOKEN=${QUANT_TOKEN}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+
+volumes:
+  symfony_var:

@@ -1,0 +1,11 @@
+[{
+    "title": "Symfony",
+    "url": "/deploy/step-one?template=app-symfony",
+    "summary": "High-performance PHP framework with reusable components.",
+    "content": "Deploy Symfony, the leading PHP framework for web applications. Features a powerful dependency injection container, Doctrine ORM integration, Twig templating, and enterprise-grade components used by thousands of projects.",
+    "image": "https://raw.githubusercontent.com/quantcdn-templates/app-symfony/main/quant/screenshot.png",
+    "categories": ["framework", "php"],
+    "tags": ["symfony", "php", "framework", "doctrine", "twig"],
+    "template_type": "app",
+    "requires_db": false
+}]
