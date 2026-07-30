@@ -16,11 +16,9 @@ services:
 
       # Database Configuration (optional, only if using Doctrine)
       - DATABASE_URL=${DATABASE_URL:-}
-      - DB_HOST=${DB_HOST:-db}
-      - DB_PORT=${DB_PORT:-3306}
-      - DB_DATABASE=${DB_DATABASE:-symfony}
-      - DB_USERNAME=${DB_USERNAME:-symfony}
-      - DB_PASSWORD=${DB_PASSWORD:-symfony}
+      # NOTE: DB_HOST/DB_PORT/DB_DATABASE/DB_USERNAME/DB_PASSWORD must NOT be set here.
+      # Compose-declared env OVERRIDES Quant Cloud's injected RDS values and breaks
+      # deployed apps. Local-dev values live in docker-compose.override.yml.example.
 
       # Mailer Configuration
       - MAILER_DSN=${MAILER_DSN:-null://null}
