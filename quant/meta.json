@@ -7,5 +7,13 @@
     "categories": ["framework", "php"],
     "tags": ["symfony", "php", "framework", "doctrine", "twig"],
     "template_type": "app",
-    "requires_db": false
+    "requires_db": false,
+    "secrets": [
+        {
+            "name": "APP_SECRET",
+            "description": "Symfony application secret (generated per site)",
+            "generate": "random",
+            "length": 64
+        }
+    ]
 }]

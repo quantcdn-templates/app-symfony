@@ -15,12 +15,15 @@ services:
       # Symfony Configuration
       - APP_ENV=${APP_ENV:-prod}
       - APP_DEBUG=${APP_DEBUG:-0}
-      - APP_SECRET=${APP_SECRET:-0b093dcaa6094a41e8d7795f045a3a93}
+      # NOTE: APP_SECRET must NOT be set here. Quant Cloud generates it as a secret
+      # (see quant/meta.json) and injects it. A value here would override it, and a
+      # fixed value would be shared by every site made from this template.
+      # For local development, set APP_SECRET in docker-compose.override.yml.
 
       # Database Configuration (optional, only if using Doctrine)
       - DATABASE_URL=${DATABASE_URL:-}
       # NOTE: DB_HOST/DB_PORT/DB_DATABASE/DB_USERNAME/DB_PASSWORD must NOT be set here.
-      # Compose-declared env OVERRIDES Quant Cloud's injected RDS values and breaks
+      # Compose-declared env OVERRIDES Quant Cloud's injected managed database values and breaks
       # deployed apps. Local-dev values live in docker-compose.override.yml.example.
 
       # Mailer Configuration

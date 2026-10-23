@@ -18,7 +18,7 @@ A production-ready Symfony application template for Quant Cloud, featuring PHP 8
   - Client IP handling via `Quant-Client-IP` header
   - Host header override for `Quant-Orig-Host`
   - SMTP relay support for email delivery
-  - UID/GID 1000 mapping for EFS compatibility
+  - UID/GID 1000 mapping for shared filesystem compatibility
 - **Logging to stdout/stderr** for Docker best practices
 
 ## Quick Start
@@ -42,7 +42,7 @@ A production-ready Symfony application template for Quant Cloud, featuring PHP 8
    ```
 
    Edit `docker-compose.override.yml` to set your local environment variables, especially:
-   - `APP_SECRET` - Generate a random secret key
+   - `APP_SECRET` - Generate a random secret key (for example `openssl rand -hex 32`)
    - Database credentials (if using Doctrine)
 
 3. Start the application:
@@ -59,7 +59,7 @@ A production-ready Symfony application template for Quant Cloud, featuring PHP 8
 Key environment variables you should configure:
 
 #### Symfony Configuration
-- `APP_SECRET` - Application secret key (required)
+- `APP_SECRET` - Application secret key (required). The portal generates a unique secret for the production environment of an app created through the dashboard template flow, and injects it. If you create other environments (e.g. staging, PR environments) or deploy outside the dashboard template flow, set the APP_SECRET secret yourself — the container refuses to start without it. The container refuses to start if the secret is empty or still the placeholder from `src/.env`. For local development, set it in `docker-compose.override.yml`.
 - `APP_ENV` - Application environment (default: prod)
 - `APP_DEBUG` - Enable debug mode (default: 0)
 
