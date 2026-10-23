@@ -59,7 +59,7 @@ A production-ready Symfony application template for Quant Cloud, featuring PHP 8
 Key environment variables you should configure:
 
 #### Symfony Configuration
-- `APP_SECRET` - Application secret key (required). Quant Cloud generates a unique secret for each site and injects it. The container refuses to start if the secret is empty or still the placeholder from `src/.env`. For local development, set it in `docker-compose.override.yml`.
+- `APP_SECRET` - Application secret key (required). The portal generates a unique secret for the production environment of an app created through the dashboard template flow, and injects it. If you create other environments (e.g. staging, PR environments) or deploy outside the dashboard template flow, set the APP_SECRET secret yourself — the container refuses to start without it. The container refuses to start if the secret is empty or still the placeholder from `src/.env`. For local development, set it in `docker-compose.override.yml`.
 - `APP_ENV` - Application environment (default: prod)
 - `APP_DEBUG` - Enable debug mode (default: 0)
 
