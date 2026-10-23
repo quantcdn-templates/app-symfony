@@ -18,7 +18,7 @@ A production-ready Symfony application template for Quant Cloud, featuring PHP 8
   - Client IP handling via `Quant-Client-IP` header
   - Host header override for `Quant-Orig-Host`
   - SMTP relay support for email delivery
-  - UID/GID 1000 mapping for EFS compatibility
+  - UID/GID 1000 mapping for shared filesystem compatibility
 - **Logging to stdout/stderr** for Docker best practices
 
 ## Quick Start

@@ -1,6 +1,6 @@
 FROM ghcr.io/quantcdn-templates/app-apache-php:8.4
 
-# Remap www-data to UID/GID 1000 to match EFS access points
+# Remap www-data to UID/GID 1000 to match shared filesystem access points
 RUN groupmod -g 1000 www-data && \
     usermod -u 1000 -g 1000 www-data && \
     # Fix ownership of existing www-data files after UID/GID change
