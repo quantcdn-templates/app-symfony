@@ -7,7 +7,8 @@ services:
       # Symfony Configuration
       - APP_ENV=dev
       - APP_DEBUG=1
-      - APP_SECRET=your-secret-key-here
+      # DEV ONLY: placeholder for local development. Never use it in a deployed environment.
+      - APP_SECRET=local-dev-only-not-a-secret
 
       # Database Configuration (optional, only if using Doctrine)
       # - DATABASE_URL=mysql://symfony:symfony@db:3306/symfony?serverVersion=8.4
