@@ -4,6 +4,7 @@ x-quant-labels:
 
 services:
   symfony:
+    image: ghcr.io/quantcdn-templates/app-symfony:latest
     build: .
     restart: unless-stopped
     ports:
