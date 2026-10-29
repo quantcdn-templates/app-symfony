@@ -4,6 +4,7 @@
 services:
   symfony:
     environment:
+      - DISABLE_DB_TLS=true
       # Symfony Configuration
       - APP_ENV=dev
       - APP_DEBUG=1

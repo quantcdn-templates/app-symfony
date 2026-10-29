@@ -229,3 +229,10 @@ This template comes without a database by default. To add MySQL support:
 ## License
 
 This Symfony application template is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Managed database TLS
+
+Doctrine verifies MySQL and PostgreSQL server certificates against
+`/opt/rds-ca-certs/rds-ca-cert-bundle.pem`, matching Drupal.
+Use `DISABLE_DB_TLS=true` only for local development databases.
+Custom CA files can be supplied through `MYSQL_ATTR_SSL_CA` or `DB_SSLROOTCERT`.
