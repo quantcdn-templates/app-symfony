@@ -61,7 +61,7 @@ COPY src/composer.json src/composer.lock* ./
 RUN set -eux; \
     export COMPOSER_HOME="$(mktemp -d)"; \
     composer config apcu-autoloader true; \
-    composer update --optimize-autoloader --apcu-autoloader --no-dev --no-scripts; \
+    composer install --optimize-autoloader --apcu-autoloader --no-dev --no-scripts; \
     rm -rf "$COMPOSER_HOME"
 
 # Configure Apache DocumentRoot for Symfony public directory and fix ALL logging
