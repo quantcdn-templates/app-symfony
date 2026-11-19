@@ -19,7 +19,7 @@
         "symfony/monolog-bundle": "^3.10",
         "symfony/runtime": "^7.1",
         "symfony/twig-bundle": "^7.1",
-        "symfony/yaml": "^7.1"
+        "symfony/yaml": "^8.1"
     },
     "require-dev": {
         "symfony/debug-bundle": "^7.1",
